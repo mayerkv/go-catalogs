@@ -3,8 +3,7 @@ name: CI to Docker Hub
 on:
   push:
     tags:
-      - v*.*.*
-
+      - '*'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -26,6 +25,12 @@ jobs:
             context: ./
             file: ./Dockerfile
             push: true
-            tags: ${{ secrets.DOCKER_HUB_USERNAME }}/${{ github.event.repository.name }}:${{ github.tag }}
+            tags: ${{ secrets.DOCKER_HUB_USERNAME }}/${{ github.repository }}:latest
+        - name: ENV
+          env:
+            CONTAINER_IMAGE: ${{ secrets.DOCKER_HUB_USERNAME }}/${{ github.repository }}:latest
+          run: |
+            echo $CONTAINER_IMAGE
+            echo ${{ github.repository }}
         - name: Image digest
           run: echo ${{ steps.docker_build.outputs.digest }}
