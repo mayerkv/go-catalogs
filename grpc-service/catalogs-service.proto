@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+option go_package = "github.com/mayerkv/go-catalogs/grpc-service;grpc_service";
+
+service CatalogsService {
+  rpc CreateCatalog(CreateCatalogRequest) returns (CreateCatalogResponse) {}
+  rpc AddCatalogItem(AddCatalogItemRequest) returns (AddCatalogItemResponse) {}
+  rpc GetCatalogItems(GetCatalogItemsRequest) returns (GetCatalogItemsResponse) {}
+}
+
+message CreateCatalogRequest {
+  Catalog catalog = 1;
+}
+
+message CreateCatalogResponse {}
+
+message AddCatalogItemRequest {
+  string catalogId = 1;
+  CatalogItem item = 2;
+}
+
+message AddCatalogItemResponse {}
+
+message GetCatalogItemsRequest {
+  string catalogId = 1;
+}
+
+message GetCatalogItemsResponse {
+  repeated CatalogItem items = 1;
+}
+
+message Catalog {
+  string id = 1;
+  string title = 2;
+  repeated CatalogItem items = 3;
+}
+
+message CatalogItem {
+  string id = 1;
+  string value = 2;
+}
