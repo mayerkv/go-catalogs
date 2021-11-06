@@ -10,5 +10,5 @@ protoc --go_out=. --go_opt=paths=source_relative \
 ```
 
 ```shell
-docker build -t go-catalogs:latest .
+docker build -t kvmayer/go-catalogs:latest .
 ```
