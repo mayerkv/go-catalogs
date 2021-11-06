@@ -22,11 +22,11 @@ jobs:
           id: docker_build
           uses: docker/build-push-action@v2
           env:
-            REPOSITORY_NAME: $(echo '${{ github.repository }}' | awk -F '/' '{print $2}')
+            IMAGE_NAME: ${{ secrets.DOCKER_HUB_USERNAME }}/$(echo '${{ github.repository }}' | awk -F '/' '{print $2}')
           with:
             context: ./
             file: ./Dockerfile
             push: true
-            tags: ${{ secrets.DOCKER_HUB_USERNAME }}/${{ REPOSITORY_NAME }}:latest
+            tags: $IMAGE_NAME:latest
         - name: Image digest
           run: echo ${{ steps.docker_build.outputs.digest }}
