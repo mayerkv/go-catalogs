@@ -20,7 +20,7 @@ func CreateCatalog(id, title string, items []CatalogItem) *Catalog {
 		id = uuid.NewString()
 	}
 
-	var itemsMap map[string]CatalogItem
+	itemsMap := make(map[string]CatalogItem)
 	if items != nil {
 		for _, i := range items {
 			if i.Id == "" {

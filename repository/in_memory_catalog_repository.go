@@ -11,7 +11,9 @@ type InMemoryCatalogRepository struct {
 }
 
 func NewInMemoryCatalogRepository() domain.CatalogRepository {
-	return &InMemoryCatalogRepository{}
+	return &InMemoryCatalogRepository{
+		items: map[string]domain.Catalog{},
+	}
 }
 
 func (r *InMemoryCatalogRepository) Save(catalog *domain.Catalog) error {
