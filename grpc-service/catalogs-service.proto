@@ -12,7 +12,9 @@ message CreateCatalogRequest {
   Catalog catalog = 1;
 }
 
-message CreateCatalogResponse {}
+message CreateCatalogResponse {
+  string id = 1;
+}
 
 message AddCatalogItemRequest {
   string catalogId = 1;

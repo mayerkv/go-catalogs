@@ -14,12 +14,14 @@ func NewCatalogsServiceServerImpl(catalogService *domain.CatalogService) Catalog
 }
 
 func (s *CatalogsServiceServerImpl) CreateCatalog(ctx context.Context, request *CreateCatalogRequest) (*CreateCatalogResponse, error) {
-	_, err := s.catalogService.CreateCatalog(request.Catalog.Id, request.Catalog.Title, mapItems(request.Catalog.Items))
+	c, err := s.catalogService.CreateCatalog(request.Catalog.Id, request.Catalog.Title, mapItems(request.Catalog.Items))
 	if err != nil {
 		return nil, err
 	}
 
-	return &CreateCatalogResponse{}, nil
+	return &CreateCatalogResponse{
+		Id: c.Id,
+	}, nil
 }
 
 func (s *CatalogsServiceServerImpl) AddCatalogItem(ctx context.Context, request *AddCatalogItemRequest) (*AddCatalogItemResponse, error) {
